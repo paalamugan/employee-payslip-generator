@@ -1,0 +1,15 @@
+{
+	"exec": "npm run dev",
+    "watch": [
+      "server/*",
+      "public/*",
+      "views/*"
+    ],
+    "ignore": [
+      "**/__tests__/**",
+      "*.test.js",
+      "*.spec.js"
+    ],
+	"legacyWatch": true,
+	"delay": 1000 
+}

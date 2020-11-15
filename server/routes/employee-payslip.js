@@ -1,13 +1,14 @@
-var express = require('express');
-var moment      = require('moment');
-var nodemailer  = require("nodemailer");
-var htmlToText  = require("nodemailer-html-to-text").htmlToText;
+import express from 'express';
+import moment from 'moment';
+import nodemailer from 'nodemailer';
+import { htmlToText } from 'nodemailer-html-to-text';
+
 // var pdf = require("pdf-creator-node");
-var pdf = require('html-pdf');
-var fs = require('fs');
-var path = require('path');
-var phantom = require('phantom');
-var jsreport = require('jsreport-core')();
+// var pdf = require('html-pdf');
+// var fs = require('fs');
+// var path = require('path');
+// var phantom = require('phantom');
+// var jsreport = require('jsreport-core')();
 
 var router = express.Router();
 
@@ -23,11 +24,11 @@ function checkIfJsReportIsInit() {
 }
 
 function getName(){
-  return this['firstName'] + ' ' + this['lastName'];
+  return this.firstName + ' ' + this.lastName;
 }
 
 function getGrossIncome(){
-  return this['annualSalary']/12;
+  return this.annualSalary/12;
 }
 
 function getIncomeTax(){
@@ -42,7 +43,7 @@ function getIncomeTax(){
 
   // var incomeTax = 0;
   // var cCount = 0;
-  var income = this['annualSalary'];
+  var income = this.annualSalary;
   // if(income <= 18200){
   //    incomeTax = 0;
   // }
@@ -91,7 +92,7 @@ function getCalenderMonth(){
 //   let date1 = new Date('01-'+monthNames[date.getMonth()+1]+'-'+date.getFullYear());
 //   return this['paymentStartDate'].substr(0,2) + ' ' + monthNames[date.getMonth()] + ' , ' +date.getFullYear()+ '  -  ' +
 //          date1.getUTCDate() + ' ' + monthNames[date.getMonth()] + ' , ' +date.getFullYear();
-      return this['paymentStartDate'];
+      return this.paymentStartDate;
 }
 
 var mailer = {
@@ -104,7 +105,7 @@ var mailer = {
             pass: "fbfedcc63376bd"
         }
     }
-}
+};
 
 var subject = "Employee Payslip";
 var to = "paalamugan@atatus.com";
@@ -143,7 +144,7 @@ let send = function(recipients, subject, body, cb) {
     else {
         console.warn("Unable to send email! Invalid mailer transport: stmp" );
     }
-}
+};
 
 router.post('/', function(req, res, next) {
 
@@ -171,7 +172,7 @@ router.post('/', function(req, res, next) {
         data: {},
         path: "./output.pdf"
     };
-    var base = path.join(__dirname,"..")
+    var base = path.join(__dirname,"..");
 
     var options = {
         height: "10.5in",
@@ -183,7 +184,7 @@ router.post('/', function(req, res, next) {
     res.render("payslip-pdf", data, function(err, html) {
 
         if (err){
-            console.log("err", err)
+            console.log("err", err);
             return next(err);
         }
 
@@ -202,11 +203,11 @@ router.post('/', function(req, res, next) {
                         marginLeft: '0.25in'
                     },
                 }
-            })
+            });
         }).then((resp) => {
             fs.writeFileSync(base+'/report.pdf', resp.content);
             res.sendStatus(200);
-        })
+        });
 
 
         // phantom.create().then(function(ph) {
@@ -244,4 +245,4 @@ router.post('/', function(req, res, next) {
     });
 });
 
-module.exports = router;
+export default router;

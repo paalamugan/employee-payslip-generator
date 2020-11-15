@@ -4,9 +4,11 @@
  * Module dependencies.
  */
 
-var app = require('../app');
-var debug = require('debug')('payslip-generator-api-old:server');
-var http = require('http');
+import app from '../app';
+import debugLib from 'debug';
+import http from 'http';
+
+var debug = debugLib('payslip-generator-api:server');
 
 /**
  * Get port from environment and store in Express.

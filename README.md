@@ -2,14 +2,15 @@
 
 Generate a Employee monthly payslip and send to mail
 
-To Run Server: npm run start
+To Run Server: `npm run start`
 
 Method: Post
 
 Url: <http://localhost:3000/employee>
 
 Request Body:
-```
+
+```json
 { "first-name" : "John","last-name" : "Miller","annual-salary" : 190000,"super-rate" : 9,"payment-start-date" : "01 March - 31 March"}
 ```
 
