@@ -1,0 +1,59 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@formatjs/intl-relativetimeformat": "^7.3.6",
+    "@material-ui/core": "^4.11.2",
+    "@material-ui/icons": "^4.11.2",
+    "base-shell": "^1.2.20",
+    "github-markdown-css": "^4.0.0",
+    "intl": "^1.2.5",
+    "intl-locales-supported": "^1.8.12",
+    "material-ui-shell": "^1.1.26",
+    "notistack": "^1.0.3",
+    "react": "^17.0.1",
+    "react-custom-scrollbars": "^4.2.1",
+    "react-dom": "^17.0.1",
+    "react-easy-crop": "^3.3.1",
+    "react-intl": "^5.10.16",
+    "react-ios-pwa-prompt": "^1.8.4",
+    "react-markdown": "^5.0.3",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.1",
+    "react-virtualized-auto-sizer": "^1.0.4",
+    "react-window": "^1.8.6"
+  },
+  "scripts": {
+    "start": "export PORT=3001 && react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@hot-loader/react-dom": "^17.0.1",
+    "eslint": "^7.18.0",
+    "eslint-plugin-react": "^7.22.0",
+    "react-app-rewire-hot-loader": "^2.0.1",
+    "react-app-rewired": "^2.1.8",
+    "react-hot-loader": "^4.13.0"
+  }
+}

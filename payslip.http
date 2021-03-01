@@ -1,0 +1,15 @@
+GET http://localhost:3000/employee
+
+
+###
+
+POST http://localhost:3000/employee/payslip
+content-type: application/json
+
+{ 
+    "firstName" : "Paala",
+    "lastName" : "Mugan",
+    "annualSalary" : 190000,
+    "superRate" : 9,
+    "paymentStartDate" : "01 March - 31 March"
+}

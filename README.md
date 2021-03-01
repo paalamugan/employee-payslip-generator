@@ -4,6 +4,8 @@ Generate a Employee monthly payslip and send to mail
 
 To Run Server: `npm run start`
 
+To Run Development: `npm run dev`
+
 Method: Post
 
 Url: <http://localhost:3000/employee>
@@ -27,3 +29,34 @@ Reference
 <https://www.npmjs.com/package/html-pdf>
 
 <https://github.com/marcbachmann/node-html-pdf>
+
+puppeteer must be this version `"puppeteer": "^2.0.0"`
+
+
+
+Earnings
+```
+Basic pay
+Dearness Allowance
+Medical Allowance
+Overtime
+House Rent  Allowance
+Conveyance Allowance
+Leave travel Allowance
+Performance Bonus
+Special Allowance
+Lunch Allowance
+Telephone Allowance
+```
+
+Deductions
+Provident Fund -  12% Basic salary
+Professinal Tax - Its a state tax applicable in only certain states
+Income Tax - Tentative tax every month based on your tax saving declaration
+
+Payslip for march 2021
+
+Dear paalamugan,
+
+We attach a march 2021 payslip below, 
+
