@@ -23,6 +23,10 @@ Content-Disposition: form-data; name="employeeName"
 
 Paalamugan S
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="employeeEmail"
+
+abc@gmail.com
+------WebKitFormBoundary7MA4YWxkTrZu0gW
 Content-Disposition: form-data; name="employeePosition"
 
 Software Engineer
@@ -31,7 +35,7 @@ Content-Disposition: form-data; name="earnings"
 
 [{"name":"Basic pay","amount":25000},{"name":"House Rent Allowance","amount":5000},{"name":"Dearness Allowance","amount":3750}]
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="earnings"
+Content-Disposition: form-data; name="deductions"
 
 [{"name":"Provident Fund","amount":3000}]
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
@@ -41,5 +45,5 @@ Content-Disposition: form-data; name="reimbursements"
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
 Content-Disposition: form-data; name="type"
 
-download
+email
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--

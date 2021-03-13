@@ -81,9 +81,14 @@ router.post('/', async (req, res, next) => {
     body.companyIconUrl = imageBase64 ? `data:${req.file.mimetype};base64,${imageBase64}` : body.companyIconUrl;
     body.employeeJoiningDate = body.employeeJoiningDate ? moment(body.employeeJoiningDate).format('DD-MM-YYYY') : '';
 
-    body.earnings = body.earnings ? JSON.parse(body.earnings) : [];
-    body.deductions = body.deductions ? JSON.parse(body.deductions) : [];
-    body.reimbursements = body.reimbursements ? JSON.parse(body.reimbursements) : [];
+    try {
+        body.earnings = body.earnings ? JSON.parse(body.earnings) : [];
+        body.deductions = body.deductions ? JSON.parse(body.deductions) : [];
+        body.reimbursements = body.reimbursements ? JSON.parse(body.reimbursements) : [];
+    } catch(err) {
+        return next(err);
+    }
+
 
     if (!body.companyName) {
         error = "Company name is missing!";

@@ -190,6 +190,3 @@ Income tax on above net income = 10% of 3,77,500
 - [node-html-pdf](https://github.com/marcbachmann/node-html-pdf)
 
 - [puppeteer](https://www.npmjs.com/package/puppeteer)(Use Version `"puppeteer": "^2.0.0"`)
-
-
-
