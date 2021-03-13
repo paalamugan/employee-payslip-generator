@@ -1,7 +1,0 @@
-export SITE_URL=http://localhost:3000
-export APP_EMAIL=paalamugan26@gmail.com
-export APP_EMAIL_PASSWORD=lrenkrodvraufrfn
-export MAILTRAP_USER=20c42f5564c5d6
-export MAILTRAP_PASSWORD=26bf366fd4e6df
-export ETHEREAL_USER=ellis6@ethereal.email
-export ETHEREAL_PASSWORD=RpwFv1H3jdzbxDbSHE
