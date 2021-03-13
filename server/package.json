@@ -1,0 +1,55 @@
+{
+  "name": "payslip-generator-api",
+  "version": "1.0.0",
+  "private": true,
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js",
+    "dev": "env-cmd -r ./.env-cmdrc -e development nodemon",
+    "prod": "env-cmd -r ./.env-cmdrc -e production npm run start"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
+    "email-templates": "^7.2.0",
+    "esm": "^3.2.25",
+    "express": "~4.16.1",
+    "express-validator": "^6.10.0",
+    "html-pdf": "^2.2.0",
+    "http-errors": "~1.6.3",
+    "jsreport": "^2.10.0",
+    "jsreport-chrome-pdf": "^1.10.0",
+    "jsreport-core": "^2.10.1",
+    "jsreport-handlebars": "^2.1.0",
+    "jsreport-pug": "^3.1.0",
+    "lodash": "^4.17.20",
+    "mailgun-js": "^0.22.0",
+    "moment": "^2.29.1",
+    "morgan": "~1.9.1",
+    "multer": "^1.4.2",
+    "nodemailer": "^6.4.16",
+    "nodemailer-html-to-text": "^3.1.0",
+    "numeral": "^2.0.6",
+    "pug": "^3.0.0",
+    "puppeteer": "^2.1.1"
+  },
+  "devDependencies": {
+    "detect-port": "^1.3.0",
+    "env-cmd": "^10.1.0",
+    "kill-port": "^1.6.1",
+    "nodemon": "^2.0.6"
+  },
+  "engines": {
+    "node": "14.8.0"
+  },
+  "nodemonConfig": {
+    "legacyWatch": true,
+    "delay": "1500",
+    "watch": [
+      "."
+    ]
+  }
+}

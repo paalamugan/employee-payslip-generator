@@ -1,0 +1,115 @@
+extend ./layouts/main.pug
+
+block content
+	.payslip-box
+		table.border-bottom(cellspacing="0" cellpadding="0")
+			tbody
+				tr
+					td.pt-0.valign-bottom
+						.mb-5
+							b.font-22= companyName
+						if companyAddress
+							div= companyAddress
+					if companyIconUrl
+						td.pb-0.pt-0.text-right
+							img.mr-5.company-icon(src=companyIconUrl alt="Company Icon" onerror=`this.onerror=null;this.src='${invalidIcon}';`)
+
+		table(cellspacing="0" cellpadding="0")
+			tbody
+				tr
+					td(colspan="4")
+						b.font-22 Payslip for the month of #{generatedMonth}
+				tr
+					td.pb-0(colspan="4")
+						.mb-5
+							b.font-18.text-uppercase= employeeName
+							if employeeId
+								span , #{employeeId}
+						div
+							span= employeePosition
+								if employeeJoiningDate
+									span &nbsp; | Date of Joining : #{employeeJoiningDate}
+				tr
+					if employeeUan
+						td.valign-bottom
+							.mb-5 UAN Number
+							div
+								b= employeeUan
+					if employeePfAccountNumber
+						td.valign-bottom
+							.mb-5 PF A/C Number
+							div
+								b= employeePfAccountNumber
+					if employeeAccountNumber
+						td.valign-bottom
+							.mb-5 Bank Account Number
+							div
+								b= employeeAccountNumber
+					td.text-right
+						.mb-5 Employee Net Pay
+						.font-38(class=`${employeePaidDays || employeeLopDays ? 'mb-5' : '' }`)= formatCurrency(totalNetIncome)
+						div
+							if employeePaidDays
+								span Paid Days : #{employeePaidDays}
+							if employeeLopDays
+								span &nbsp; | LOP Days : #{employeeLopDays}
+		br
+		table.table(cellspacing="0" cellpadding="0")
+			thead
+				tr
+					th EARNINGS
+					th AMOUNT
+					//-th YTD
+					th
+					th DEDUCTIONS
+					th AMOUNT
+					//-th YTD
+			tbody
+				each row in earningAndDeductions
+					tr
+						td= row.earningName
+						td= row.earningAmount ? formatCurrency(row.earningAmount) : ''
+						//- td row.earningYTD ? formatCurrency(row.earningYTD) : ''
+						td
+						td= row.deductionName
+						td= row.deductionName || row.deductionAmount ? formatCurrency(row.deductionAmount) : ''
+						//- td row.deductionYTD ? formatCurrency(row.deductionYTD) : ''
+			tfoot
+				tr
+					td Gross Earnings
+					td= formatCurrency(totalEarnings)
+					//- td totalEarningsYTD ? formatCurrency(totalEarningsYTD) : ''
+					td
+					td Total Deductions
+					td= formatCurrency(totalDeductions)
+					//- td totalDeductionsYTD ? formatCurrency(totalDeductionsYTD) : ''
+		br
+		br
+		if totalReimbursements
+			table.table(cellspacing="0" cellpadding="0")
+				thead
+					tr
+						th REIMBURSEMENTS
+						th AMOUNT
+						//- th YTD
+				tbody
+					each reimbursement in reimbursements
+						tr
+							td= reimbursement.name
+							td= reimbursement.amount ? formatCurrency(reimbursement.amount) : ''
+							//- td reimbursement.ytd ? formatCurrency(reimbursement.ytd) : ''
+				tfoot
+					tr
+						td Total Reimbursement
+						td= formatCurrency(totalReimbursements)
+						//- td totalReimbursementsYTD ? formatCurrency(totalReimbursementsYTD) : ''
+		br
+		br
+		table.page-break-inside-avoid
+			tbody
+				tr
+					td.net-payable
+						.mb-5
+							span.text Total Net Payable #{formatCurrency(totalNetIncome)}
+							span (Rupees #{convertNumberToRupees(totalNetIncome)})
+						.calculation-text Total Net Payable= ((Gross Earnings - Total Deductions) + Reimbursements)

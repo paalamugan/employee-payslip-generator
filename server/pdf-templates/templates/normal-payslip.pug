@@ -1,0 +1,93 @@
+extend ./layouts/main.pug
+
+block content
+	.payslip-box
+		div(style="text-align:center")
+			img(src="/images/no-icon.svg" alt="No Icon")
+			h1(style="font-size:22px; font-weight:bold; margin:15px 0px;") Tarzax Techonolgy
+			h3(style="font-size:17px; font-weight:800;") Pay Slip for the period of jan 2019
+
+		div(style="width:50%; float:left;")
+			div(style="margin-bottom: 10px")
+				div(style="width:48%; display: inline-block;" ) Employee Code
+				div(style="width:4%; display: inline-block;") :
+				div(style="width:48%; display: inline-block;") 122899
+			div(style="margin-bottom: 10px")
+				div(style="width:48%; display: inline-block;" ) Email ID
+				div(style="width:4%; display: inline-block;") :
+
+
+				div(style="width:48%; display: inline-block; vertical-align: text-top; word-break: break-word;") abc@gmail.com
+			div(style="margin-bottom: 10px")
+				div(style="width:48%; display: inline-block;" ) Bank Name
+				div(style="width:4%; display: inline-block;") :
+				div(style="width:48%; display: inline-block; text-transform:uppercase; vertical-align: text-top;") union bank of india
+			div(style="margin-bottom: 10px")
+				div(style="width:48%; display: inline-block; vertical-align: text-top;" ) Number of Working Days
+				div(style="width:4%; display: inline-block;") :
+				div(style="width:48%; display: inline-block;") 31
+			div(style="margin-bottom: 10px")
+				div(style="width:48%; display: inline-block;" ) Date of Joining
+				div(style="width:4%; display: inline-block;") :
+				div(style="width:48%; display: inline-block;") 20-oct-2018
+
+		div(style="width:50%; float:left;")
+			div(style="margin-left:20px;")
+				div(style="margin-bottom: 10px")
+					div(style="width:48%; display: inline-block;") Name
+					div(style="width:4%; display: inline-block;") :
+					div(style="width:48%; display: inline-block; vertical-align: text-top;") Paala mugan
+				div(style="margin-bottom: 10px")
+					div(style="width:48%; display: inline-block;") Designation
+					div(style="width:4%; display: inline-block;") :
+					div(style="width:48%; display: inline-block; vertical-align: text-top;") Full Stack Developer
+				div(style="margin-bottom: 10px")
+					div(style="width:48%; display: inline-block;") Location
+					div(style="width:4%; display: inline-block;") :
+					div(style="width:48%; display: inline-block; vertical-align: text-top;") Chennai
+				div(style="margin-bottom: 10px")
+					div(style="width:48%; display: inline-block;") Bank Account Number
+					div(style="width:4%; display: inline-block;") :
+					div(style="width:48%; display: inline-block; word-break: break-word; vertical-align: text-top;") 8790654738728983
+				div(style="margin-bottom: 10px")
+					div(style="width:48%; display: inline-block; vertical-align: text-top;") Income Tax Number(PAN)
+					div(style="width:4%; display: inline-block;") :
+					div(style="width:48%; display: inline-block;") CYSPS4563878
+				div(style="margin-bottom: 10px")
+					div(style="width:48%; display: inline-block;") PF Account Number
+					div(style="width:4%; display: inline-block;") :
+					div(style="width:48%; display: inline-block; vertical-align: text-top;") N/A
+				div(style="margin-bottom: 10px")
+					div(style="width:48%; display: inline-block;") ESI Number
+					div(style="width:4%; display: inline-block;") :
+					div(style="width:48%; display: inline-block; vertical-align: text-top;") N/A
+
+
+		div(style="margin-top: 200px")
+			table(cellpadding='0', cellspacing='0', align='center', border='1')
+				thead
+					tr
+						th
+							b Earnings
+						th
+							b Amount
+						th
+							b Deductions
+						th
+							b Amount
+				tbody
+					tr
+						td Basic
+						td 29,000
+						td Tax Deducted at Source
+						td 1,739
+					tr
+						td HRA
+						td 10,500
+						td Profession Tax
+						td 208
+					tr
+						td Other Allowances
+						td 10,500
+						td
+						td

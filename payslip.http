@@ -1,0 +1,45 @@
+GET http://localhost:3000/
+
+###
+
+POST http://localhost:3000/api/payslip
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="companyIcon"; filename="no-icon.png"
+Content-Type: image/png
+
+< ./client/public/images/no-icon.png
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="companyName"
+
+Tarzax Technology Pvt ltd.
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="companyAddress"
+
+250, S-BLock, 27 Street, Adayar, Chennai: 600027
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="employeeName"
+
+Paalamugan S
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="employeePosition"
+
+Software Engineer
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="earnings"
+
+[{"name":"Basic pay","amount":25000},{"name":"House Rent Allowance","amount":5000},{"name":"Dearness Allowance","amount":3750}]
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="earnings"
+
+[{"name":"Provident Fund","amount":3000}]
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="reimbursements"
+
+[{"name":"Medical Reimbursement","amount":5000},{"name":"Telephone Reimbursement","amount":1750}]
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="type"
+
+download
+------WebKitFormBoundary7MA4YWxkTrZu0gW--

@@ -1,0 +1,261 @@
+@import url(//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&subset=latin,latin-ext);
+
+a {
+  color: #007ee6;
+  text-decoration: none;
+}
+
+.dont-break-out {
+
+  /* These are technically the same, but use both */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  -ms-word-break: break-all;
+  /* This is the dangerous one in WebKit, as it breaks things wherever */
+  word-break: break-all;
+  /* Instead use this non-standard one: */
+  word-break: break-word;
+
+  /* Adds a hyphen where the word breaks, if supported (No Blink) */
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+
+}
+
+@media print {
+
+    .no-print {
+        display: none !important;
+    }
+
+    .page-break-inside-avoid {
+        page-break-inside: avoid;
+    }
+
+    .page-break-before-auto {
+        page-break-before: auto;
+    }
+
+    .page-break-after-auto {
+        page-break-after: auto;
+    }
+
+}
+
+
+
+body {
+  width: 100% !important;
+  margin: 0;
+  padding: 0;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  background-color: #fff;
+  color: #000000;
+}
+
+.payslip-box {
+  max-width: 1200px;
+  background-color: #fff;
+  margin: auto;
+  padding: 30px;
+  font-size: 16px;
+  font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+  /*-webkit-print-color-adjust: exact;*/
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table, th, td {
+  text-align: left;
+  padding: 15px;
+}
+
+table.table th , table.table td {
+  padding: 18px;
+}
+
+table.table th {
+  font-weight: 600;
+  font-size: 18px;
+  border-top: 2px solid #cfcfcf;
+  border-bottom: 2px solid #cfcfcf;
+}
+
+table.table tfoot td {
+  font-weight: 600;
+  border-top: 2px solid #cfcfcf;
+}
+
+img {
+  width: 70px;
+  height: 70px;
+}
+
+.company-icon {
+  vertical-align: super;
+}
+
+.border-bottom {
+  border-bottom: 2px solid #cfcfcf;
+}
+
+.mb-5 {
+  margin-bottom: 5px;
+}
+
+.mr-5 {
+  margin-right: 5px;
+}
+
+.pt-0 {
+  padding-top: 0;
+}
+
+.pb-0 {
+  padding-bottom: 0;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.valign-bottom {
+  vertical-align: bottom;
+}
+
+.text-uppercase {
+    text-transform: uppercase;
+}
+
+.font-18 {
+  font-size: 18px;
+}
+
+.font-20 {
+  font-size: 20px;
+}
+
+.font-22 {
+  font-size: 22px;
+}
+
+.font-38 {
+  font-size: 38px;
+}
+
+.table th:not(:first-child), .table td:not(:first-child) {
+  text-align: right;
+}
+
+.table th:nth-child(4), .table td:nth-child(4) {
+  text-align: left;
+}
+
+.net-payable {
+  background-color: #f3f8ff;
+  text-align: center;
+}
+
+.net-payable .text {
+  padding-right: 5px;
+  font-size: 28px;
+  vertical-align: middle;
+}
+
+.net-payable .calculation-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: #6e6f70;
+}
+
+.flex {
+    display: flex;
+}
+
+
+/*
+.invoice-box table {
+  width: 100%;
+  line-height: inherit;
+  text-align: left;
+}
+
+.invoice-box table td {
+  padding: 5px;
+  vertical-align: top;
+}
+
+.invoice-box table tr td:nth-child(2) {
+  text-align: right;
+}
+
+.invoice-box table tr.top table td {
+  padding-bottom: 20px;
+}
+
+.invoice-box table tr.top table td.title {
+  font-size: 45px;
+  line-height: 45px;
+  color: #333;
+}
+
+.invoice-box table tr.information table td {
+  padding-bottom: 40px;
+}
+
+.invoice-box table tr.heading td {
+  background: #eee;
+  border-bottom: 1px solid #ddd;
+  font-weight: bold;
+}
+
+.invoice-box table tr.details td {
+  padding-bottom: 20px;
+}
+
+.invoice-box table tr.item td{
+  border-bottom: 1px solid #eee;
+}
+
+.invoice-box table tr.item.last td {
+  border-bottom: none;
+}
+
+.invoice-box table tr.total td:nth-child(2) {
+  border-top: 2px solid #eee;
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 600px) {
+  .invoice-box table tr.top table td {
+      width: 100%;
+      display: block;
+      text-align: center;
+  }
+
+  .invoice-box table tr.information table td {
+      width: 100%;
+      display: block;
+      text-align: center;
+  }
+}
+
+.rtl {
+  direction: rtl;
+  font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+}
+
+.rtl table {
+  text-align: right;
+}
+
+.rtl table tr td:nth-child(2) {
+  text-align: left;
+} */
