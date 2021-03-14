@@ -61,5 +61,6 @@ typings/
 .next
 
 dev-example-conf.sh
+dev-conf.sh
 
 build/
