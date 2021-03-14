@@ -38,7 +38,12 @@ const pdfContent = async (pdfTemplateName, pdfTemplateData) => {
         let pdfHtml = pug.renderFile(`${PDF_TEMPLATE_PATH}/${pdfTemplateName}.pug`, pdfTemplateData);
 
         // we are using headless mode
-        const browser = await puppeteer.launch({ headless: true });
+        const browser = await puppeteer.launch({
+            args: [
+              '--no-sandbox',
+              '--disable-setuid-sandbox',
+            ],
+        });
         const page = await browser.newPage();
 
         // We set the page content as the generated html by handlebars
