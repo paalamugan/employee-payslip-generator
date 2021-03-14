@@ -43,7 +43,6 @@ npm run build
 ### For Server
 
 ```
-cd ..
 npm install
 ```
 
@@ -168,6 +167,7 @@ Net income
 
 If you has a salary of Rs. 25,000 per month with DA of Rs. 4500 per month, entertainment allowance of Rs. 2250 per month and pays Rs. 3500 towards professional tax, then his taxable income would be calculated as follows:
 
+|-------------------|:-----------:|-----------:|
 | Basic Salary      | 25000 * 12  | = 3,00,000 |
 | DA                | 4500 * 12   | = 54,000   |
 | EA                | 2250 * 12   | = 27,000   |
