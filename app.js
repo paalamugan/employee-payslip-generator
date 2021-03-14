@@ -4,7 +4,6 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import multer from 'multer';
-import bodyParser from 'body-parser';
 import payslipRouter from './routes/payslip';
 
 const app = express();
@@ -41,9 +40,8 @@ app.use(cors());
 // app.use(upload.single('companyIcon'));
 
 app.use(require('morgan')('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(require('express-validator')());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/', express.static(path.join(__dirname, 'client', 'build')));
@@ -68,14 +66,12 @@ app.use((err, req, res, next) => {
     var status = err.status || 400;
     res.status(status);
 
-    var orgMsg = err && err.message; // For debug
-
     // When node request library failed to connect to the URL.
     if (err && (err.code === 'ECONNREFUSED')) {
         err.message  = 'Oops, something breaks in our end. Try again!';
     }
 
-    var message = err.message;
+    var message = err && err.message;
     if (!message) {
         if (status === 404) {
             message = 'Not found!';
