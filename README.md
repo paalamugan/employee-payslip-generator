@@ -43,7 +43,7 @@ npm run build
 ### For Server
 
 ```
-cd server
+cd ..
 npm install
 ```
 
