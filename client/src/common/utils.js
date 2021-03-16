@@ -23,7 +23,7 @@ export const PayslipSampleData = {
     joiningDate: moment('2020-04-08').format(),
     uan: '201017181120',
     accountNumber: '8718927610892',
-    pfAccountNumber: 'TN/AAA/0000000/000/0000000',
+    pfAccountNumber: 'TN/AAA/00000/000/00000',
     paidDays: 28,
     lopDays: 3
   },
@@ -68,10 +68,10 @@ export const PayslipSampleData = {
       name: 'Medical Reimbursement',
       amount: calculateAmount(20),
     },
-    {
-      name: 'Telephone Reimbursement',
-      amount: calculateAmount(7),
-    },
+    // {
+    //   name: 'Telephone Reimbursement',
+    //   amount: calculateAmount(7),
+    // },
     // {
     //   name: 'Leave travel Reimbursement',
     //   amount: calculateAmount(6),

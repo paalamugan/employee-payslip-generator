@@ -46,14 +46,14 @@ const pdfContent = async (pdfTemplateName, pdfTemplateData) => {
         });
         const page = await browser.newPage();
 
-        // We set the page content as the generated html by handlebars
-        await page.setContent(pdfHtml);
-
-        // await page.addStyleTag({
-        //     content: '@page { size: auto; }',
-        // });
+        await page.addStyleTag({
+            content: '@page { size: auto; }',
+        });
 
         await page.emulateMediaType('screen');
+
+        // We set the page content as the generated html by handlebars
+        await page.setContent(pdfHtml);
 
         // We Use pdf function to generate the pdf in the same folder as this file.
         let content = await page.pdf(pdfOptions);
@@ -63,7 +63,6 @@ const pdfContent = async (pdfTemplateName, pdfTemplateData) => {
         return content;
 
     } catch (err) {
-        console.log("err", err);
         throw err;
     }
 
