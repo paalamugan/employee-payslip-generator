@@ -1,4 +1,4 @@
-@import url(//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&subset=latin,latin-ext);
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap');
 
 a {
   color: #007ee6;
@@ -55,6 +55,7 @@ body {
   -ms-text-size-adjust: 100%;
   background-color: #fff;
   color: #000000;
+  font-family: 'Open Sans', 'Source Sans Pro', Arial, sans-serif;
 }
 
 .payslip-box {

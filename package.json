@@ -18,6 +18,7 @@
     "cors": "^2.8.5",
     "debug": "~2.6.9",
     "email-templates": "^7.2.0",
+    "env-cmd": "^10.1.0",
     "esm": "^3.2.25",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
@@ -30,8 +31,7 @@
     "nodemailer-html-to-text": "^3.1.0",
     "numeral": "^2.0.6",
     "pug": "^3.0.0",
-    "puppeteer": "^2.1.1",
-    "env-cmd": "^10.1.0"
+    "puppeteer": "^2.1.1"
   },
   "devDependencies": {
     "concurrently": "^6.0.0",

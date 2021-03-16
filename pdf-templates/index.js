@@ -49,9 +49,11 @@ const pdfContent = async (pdfTemplateName, pdfTemplateData) => {
         // We set the page content as the generated html by handlebars
         await page.setContent(pdfHtml);
 
-        await page.addStyleTag({
-            content: '@page { size: auto; }',
-        })
+        // await page.addStyleTag({
+        //     content: '@page { size: auto; }',
+        // });
+
+        await page.emulateMediaType('screen');
 
         // We Use pdf function to generate the pdf in the same folder as this file.
         let content = await page.pdf(pdfOptions);
