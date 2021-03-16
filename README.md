@@ -4,9 +4,8 @@ Generate a Employee monthly payslip download as pdf and send to mail. [View Demo
 
 ## Only Once
 
-- If `jq` doesn't exist in your machine. use the below command to install it.(Only for linux)
-
-`jq` prettify your json response
+- If `jq` doesn't exist in your machine. use the below command to install it.(Only for linux).
+- `jq` represents prettify your json response
 
 ```sh
 apt install jq
@@ -14,7 +13,7 @@ apt install jq
 
 ## GET STARTED
 
-Node Version:
+**Node Version:**
 
 - node: v14.8.0
 - npm: v6.14.7
@@ -32,7 +31,7 @@ npm install
 
 - To run in development,
 ```
-npm run dev
+npm start
 ```
 
 - To build for production,
@@ -48,7 +47,7 @@ npm install
 
 - To run in development,
 ```
-npm run dev
+npm run server
 ```
 
 - To run in production,
@@ -58,9 +57,9 @@ npm run prod
 
 ### Download PDF or Send to email via curl
 
-- Download as PDF
+**Download as PDF**
 
-`companyIcon` or `companyIconUrl` is optional. You can pass it like.
+- `companyIcon` or `companyIconUrl` is optional. You can pass it like.
 
 ```sh
 curl -X POST -F 'companyIcon=@/home/user/Pictures/icon.png'
@@ -88,7 +87,7 @@ curl -X POST -F 'companyName=Tarzax Technology Pvt ltd.' \
     http://localhost:3000/api/payslip
 ```
 
-- Send to email
+**Send to email**
 
 ```sh
 curl -X POST -F 'companyName=Tarzax Technology Pvt ltd.' \
