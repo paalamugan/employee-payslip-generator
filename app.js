@@ -4,6 +4,10 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import multer from 'multer';
+import { CronJob } from 'cron';
+import http from 'http';
+import https from 'https';
+
 import payslipRouter from './routes/payslip';
 
 const app = express();
@@ -47,6 +51,11 @@ app.use(cookieParser());
 app.use('/', express.static(path.join(__dirname, 'client', 'build')));
 
 app.use('/api/payslip', upload.single('companyIcon'), payslipRouter);
+
+
+app.use('/health', (req, res, next) => {
+    res.send('Ok');
+})
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -119,5 +128,25 @@ app.use((err, req, res, next) => {
     });
 
 });
+
+let doActivity = () => {
+    const service  = process.env.NODE_ENV === 'production' ? https : http;
+    const req = service.get(`${process.env.SITE_URL}/health`);
+    req.end();
+    req.once('response', (res) => {
+        // const ip = req.socket.localAddress;
+        // const port = req.socket.localPort;
+        // console.log(`Your IP address is ${ip} and your source port is ${port}.`);
+        // console.log("SITE_URL", process.env.SITE_URL)
+    });
+}
+
+let thiryMinJob = new CronJob({
+    cronTime: '*/30 * * * *',
+    onTick: doActivity,
+    start: false,
+    timeZone: 'UTC'
+});
+thiryMinJob.start();
 
 export default app;
