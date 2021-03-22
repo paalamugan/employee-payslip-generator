@@ -12,7 +12,7 @@ export const PayslipSampleData = {
   company: {
     icon: null,
     iconUrl: '',
-    name: 'Tarzax Technology Pvt ltd.',
+    name: 'YesVision Pvt ltd.',
     address: '250, S-BLock, 27 Street, Adayar, Chennai: 600027'
   },
   employee: {

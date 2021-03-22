@@ -63,4 +63,6 @@ typings/
 dev-example-conf.sh
 dev-conf.sh
 
+locales/
+
 build/
