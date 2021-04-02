@@ -54,7 +54,7 @@ app.use('/api/payslip', upload.single('companyIcon'), payslipRouter);
 
 
 app.use('/health', (req, res, next) => {
-    res.send('Ok');
+    res.status(200).send('Ok');
 })
 
 // catch 404 and forward to error handler
@@ -87,7 +87,7 @@ app.use((err, req, res, next) => {
         } else if (status === 401) {
             message = 'Unauthorized!';
         } else if (status === 403) {
-            message = 'Not allowed!';
+            message = 'ForBidden!';
         } else {
             message = 'Oops, there was a problem!';
         }
