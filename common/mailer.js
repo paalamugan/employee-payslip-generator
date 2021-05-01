@@ -57,7 +57,6 @@ const send = (options) => {
                 if (err) {
                     reject(err);
                 } else {
-                    console.log("info", info);
                     resolve({});
                 }
             });
