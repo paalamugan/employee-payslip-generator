@@ -1,7 +1,14 @@
+import React from 'react';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 
-export default function Alert({ open, duration = 5000, onClose = () => {}, anchorOrigin = { vertical: 'top', horizontal: 'center' }, type, ...rest }) {
+export default function Alert({ open, 
+    duration = 5000, 
+    onClose = () => {}, 
+    anchorOrigin = { vertical: 'top', horizontal: 'center' }, 
+    type, 
+    ...rest 
+}) {
 
   if (!type || !rest.children) {
     return null;

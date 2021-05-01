@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState, forwardRef, useImperativeHandle } from 'react';
+import React, { useState, forwardRef, useImperativeHandle } from 'react';
 import { Grid, Typography, TextField, Button, Tooltip } from '@material-ui/core';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -67,7 +66,7 @@ export default forwardRef(function CompanyInfo({ templateData, classes }, ref) {
         Company Information
       </Typography>
 
-      <Alert open={openAlert} onClose={setOpenAlert} type="error" children="Support only image format.(svg, png, jpg)" />
+      <Alert open={openAlert} onClose={setOpenAlert} type="error">Support only image format.(svg, png, jpg)</Alert>
 
       <Grid container spacing={3} className={classes.girdButton}>
         <Grid item xs={12} sm={6}>

@@ -174,7 +174,6 @@ router.post('/', async (req, res, next) => {
 
             let options = {
                 subject: emailData.title,
-                from: `${companyName} <payslip@${companyName.toLowerCase()}.com>`,
                 to: body.employeeEmail || `${body.employeeName.replace(/\s+/g, '').toLowerCase()}@gmail.com`,
                 data: emailData,
                 pdf: {
@@ -185,10 +184,10 @@ router.post('/', async (req, res, next) => {
 
             let result = await sendPayslipMail(options);
 
-            return res.json({ success: true, ...result });
+            return res.json({ success: true, to: options.to, type: result.type, url: result.url });
 
         } else {
-            return next(new Error('Invalid type. Supported type is email and download'));
+            return next(new Error('Invalid type. Supported only type in email and download!'));
         }
 
     } catch (err) {

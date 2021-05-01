@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import moment from 'moment';
 import nodemailer from 'nodemailer';
 import { htmlToText } from 'nodemailer-html-to-text';
 import Mailgun from 'mailgun-js';
@@ -7,7 +6,7 @@ import config from '../config';
 import renderEmailTemplate from '../email-templates';
 
 let mailer = {
-    from: '"Tarzax" <payslip@tarzax.com>',
+    from: '"Employee Payslip" <paalamugan26@gmail.com>',
     smtp: config.ethereal // all emails are catched by ethereal.email
 };
 
@@ -27,8 +26,9 @@ if (process.env.NODE_ENV === 'production') {
             apikey: config.mailgun.apiKey,
             domain: config.mailgun.domain
         });
-    } else if (config.sendgrid.auth.user) {
-        // logic for sendgrid email service provider.
+    } else if (config.sendgrid.apiKey) {
+        sendgrid = require('@sendgrid/mail');
+        sendgrid.setApiKey(config.sendgrid.apiKey);
     } else {
         transporter = nodemailer.createTransport(mailer.smtp);
     }
@@ -37,7 +37,7 @@ if (process.env.NODE_ENV === 'production') {
     transporter = nodemailer.createTransport(mailer.smtp);
 }
 
-const send = (options) => {
+const send = async (options) => {
 
     if (mailgun) {
         return new Promise((resolve, reject) => {
@@ -49,8 +49,18 @@ const send = (options) => {
                 }
             });
         });
-    } else if (sendgrid) {
-        return sendgrid.send(options);
+    } 
+    
+    if (sendgrid) {
+        return new Promise((resolve, reject) => {
+            sendgrid.send(options, (err, info) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve({});
+                }
+            });
+        });
     }
 
     if (transporter) {
@@ -93,24 +103,19 @@ export const sendPayslipMail = async (body) => {
         from: body.from || mailer.from,
         to: body.to,
         subject: body.subject,
-        'o:tag': ['Payslip'],
+        'o:tag': ['payslip'],
     };
 
     if (pdf) {
         options.attachments =  [{
+            content: pdf.content.toString('base64'),
             filename: pdf.fileName,
-            content: pdf.content,
             type: 'application/pdf',
             disposition: 'attachment'
         }];
     }
 
-
-    try {
-        options.html = await renderEmailTemplate('payslip', data);
-    } catch (err) {
-        throw err;
-    }
+    options.html = await renderEmailTemplate('payslip', data);
 
     if (body.cc) {
         options.cc = body.cc;

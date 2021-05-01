@@ -5,12 +5,7 @@ export default {
         fromPayslip : 'Tarzax <payslip@tarzax.com>'
     },
     sendgrid: { // all emails are delivered to destination (production)
-        host: 'smtp.sendgrid.net',
-        port: 587,
-        auth: {
-            user: process.env.SENDGRID_USERNAME,
-            pass: process.env.SENDGRID_PASSWORD
-        }
+        apiKey: process.env.SENDGRID_API_KEY,
     },
     gmail: { // all emails are delivered to destination by gmail service (development)
         service: "gmail",
