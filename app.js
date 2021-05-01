@@ -54,7 +54,7 @@ app.use('/api/payslip', upload.single('companyIcon'), payslipRouter);
 
 
 app.use('/health', (req, res, next) => {
-    res.status(200).send('Ok');
+    res.send('Ok');
 })
 
 // catch 404 and forward to error handler
@@ -93,35 +93,6 @@ app.use((err, req, res, next) => {
         }
     }
 
-    // var accepted = req.accepts(['html', 'json']);
-
-    // if (accepted === 'json') {
-    //     // if (status === 401) {
-    //     //     console.log('Unauthorized User')
-    //     // }
-
-    //     res.json({
-    //         status: status,
-    //         message: message
-    //     });
-
-    // } else if (accepted === 'html') {
-    //     // if (status === 401) {
-    //     //      console.log('Unauthorized User')
-    //     // }
-
-    //     // render the error page
-    //     //res.render('error');
-
-    //     res.json({
-    //         status: status,
-    //         message: message
-    //     });
-
-    // }  else {
-    //     res.type('txt').send(message + '\n');
-    // }
-
     res.json({
         status: status,
         message: message
@@ -131,22 +102,22 @@ app.use((err, req, res, next) => {
 
 let doActivity = () => {
     const service  = process.env.NODE_ENV === 'production' ? https : http;
-    const req = service.get(`${process.env.SITE_URL}/health`);
+    const req = service.get(process.env.SITE_URL);
     req.end();
-    req.once('response', (res) => {
+    // req.once('response', (res) => {
         // const ip = req.socket.localAddress;
         // const port = req.socket.localPort;
         // console.log(`Your IP address is ${ip} and your source port is ${port}.`);
         // console.log("SITE_URL", process.env.SITE_URL)
-    });
+    // });
 }
 
-let thiryMinJob = new CronJob({
-    cronTime: '*/15 * * * *',
+let DailyJob = new CronJob({
+    cronTime: '0 0 * * *',
     onTick: doActivity,
     start: false,
     timeZone: 'UTC'
 });
-thiryMinJob.start();
+DailyJob.start();
 
 export default app;
