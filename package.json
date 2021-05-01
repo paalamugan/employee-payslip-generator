@@ -7,10 +7,10 @@
     "start": "node main.js",
     "build": "cd client && npm run build",
     "client:install": "cd client && npm install",
-    "heroku-postbuild": "npm run client:install",
+    "heroku-postbuild": "npm run client:install && npm run build",
     "client": "cd client && npm start",
     "server": "env-cmd -r ./.env-cmdrc -e development nodemon main.js",
-    "prod": "npm run build && env-cmd -r ./.env-cmdrc -e production node main.js",
+    "prod": "env-cmd -r ./.env-cmdrc -e production node main.js",
     "dev": "concurrently -n 'server, client' -c 'red,green'  \"npm run server\" \"npm run client\""
   },
   "dependencies": {
