@@ -19,7 +19,7 @@ if (config.mailtrap.auth.user) {
 let transporter;
 let mailgun;
 let sendgrid;
-console.log("config", config)
+
 if (process.env.NODE_ENV === 'production') {
     if (config.mailgun.apiKey) {
         mailgun = new Mailgun({
@@ -57,6 +57,7 @@ const send = (options) => {
                 if (err) {
                     reject(err);
                 } else {
+                    console.log("info", info);
                     resolve({});
                 }
             });
