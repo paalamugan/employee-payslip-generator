@@ -19,7 +19,7 @@ if (config.mailtrap.auth.user) {
 let transporter;
 let mailgun;
 let sendgrid;
-
+console.log("config", config)
 if (process.env.NODE_ENV === 'production') {
     if (config.mailgun.apiKey) {
         mailgun = new Mailgun({
@@ -37,7 +37,7 @@ if (process.env.NODE_ENV === 'production') {
     transporter = nodemailer.createTransport(mailer.smtp);
 }
 
-const send = async (options) => {
+const send = (options) => {
 
     if (mailgun) {
         return new Promise((resolve, reject) => {
@@ -49,8 +49,8 @@ const send = async (options) => {
                 }
             });
         });
-    } 
-    
+    }
+
     if (sendgrid) {
         return new Promise((resolve, reject) => {
             sendgrid.send(options, (err, info) => {
@@ -87,14 +87,13 @@ const send = async (options) => {
             });
         });
 
-    }
-    else {
-        console.warn("Unable to send email! Invalid mailer transport: stmp" );
+    } else {
+        console.warn("Unable to send email! Invalid mailer transport: stmp");
         return Promise.reject("Unable to send email! Invalid mailer transport: stmp");
     }
 };
 
-export const sendPayslipMail = async (body) => {
+export const sendPayslipMail = async(body) => {
 
     let data = body.data || {};
     let pdf = body.pdf || null;
@@ -107,7 +106,7 @@ export const sendPayslipMail = async (body) => {
     };
 
     if (pdf) {
-        options.attachments =  [{
+        options.attachments = [{
             content: pdf.content.toString('base64'),
             filename: pdf.fileName,
             type: 'application/pdf',
@@ -121,5 +120,5 @@ export const sendPayslipMail = async (body) => {
         options.cc = body.cc;
     }
 
-   return send(options);
+    return send(options);
 };

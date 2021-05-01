@@ -7,7 +7,8 @@ import multer from 'multer';
 import { CronJob } from 'cron';
 import http from 'http';
 import https from 'https';
-
+import dotenv from 'dotenv';
+dotenv.config();
 import payslipRouter from './routes/payslip';
 
 const app = express();
@@ -26,8 +27,8 @@ const upload = multer({ // If dest and storage property doesn't specify in multe
     // dest: '/tmp/',
     // storage: storage,
     limits: {
-      fileSize: 52428800, // max file size (in bytes) 50 MB
-      files: 1  // max number of file fields
+        fileSize: 52428800, // max file size (in bytes) 50 MB
+        files: 1 // max number of file fields
     }
 });
 
@@ -59,7 +60,7 @@ app.use('/health', (req, res, next) => {
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
-  next(createError(404));
+    next(createError(404));
 });
 
 // error handler
@@ -77,7 +78,7 @@ app.use((err, req, res, next) => {
 
     // When node request library failed to connect to the URL.
     if (err && (err.code === 'ECONNREFUSED')) {
-        err.message  = 'Oops, something breaks in our end. Try again!';
+        err.message = 'Oops, something breaks in our end. Try again!';
     }
 
     var message = err && err.message;
@@ -101,14 +102,14 @@ app.use((err, req, res, next) => {
 });
 
 let doActivity = () => {
-    const service  = process.env.NODE_ENV === 'production' ? https : http;
+    const service = process.env.NODE_ENV === 'production' ? https : http;
     const req = service.get(process.env.SITE_URL);
     req.end();
     // req.once('response', (res) => {
-        // const ip = req.socket.localAddress;
-        // const port = req.socket.localPort;
-        // console.log(`Your IP address is ${ip} and your source port is ${port}.`);
-        // console.log("SITE_URL", process.env.SITE_URL)
+    // const ip = req.socket.localAddress;
+    // const port = req.socket.localPort;
+    // console.log(`Your IP address is ${ip} and your source port is ${port}.`);
+    // console.log("SITE_URL", process.env.SITE_URL)
     // });
 }
 
