@@ -79,10 +79,13 @@ const send = (options) => {
                 } else {
                     console.info("Email message sent.", info.response);
 
-                    if (transporter.options.host.includes('ethereal')) {
+                    if (transporter.options &&
+                        transporter.options.host &&
+                        transporter.options.host.includes('ethereal')) {
                         return resolve({ type: 'ethereal', url: nodemailer.getTestMessageUrl(info) });
                     }
-                    return resolve(info);
+                    console.log("info", info)
+                    return resolve({});
                 }
             });
         });

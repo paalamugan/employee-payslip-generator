@@ -7,7 +7,7 @@ import renderPdfTemplate from '../pdf-templates';
 
 const router = express.Router();
 
-const getTotalAmount = function (type) {
+const getTotalAmount = function(type) {
 
     let rows = this[type];
     let total = 0;
@@ -20,31 +20,31 @@ const getTotalAmount = function (type) {
 
 }
 
-const getGrossIncome = function () {
+const getGrossIncome = function() {
     return getTotalAmount.call(this, 'earnings') + getTotalAmount.call(this, 'reimbursements');
 }
 
-const getGrossAnnualIncome = function () {
+const getGrossAnnualIncome = function() {
     return (getGrossIncome.call(this) * 12);
 }
 
-const getTotalNetIncome = function () {
+const getTotalNetIncome = function() {
     return getGrossIncome.call(this) - getTotalAmount.call(this, 'deductions');
 }
 
-const findIncomeTaxRow = function () {
+const findIncomeTaxRow = function() {
     return _.find(this.deductions, (deduction) => (deduction.name.replace(/\s+/g, '').toLowerCase() === 'incometax'))
 }
 
-const getIncomeTax = function () {
+const getIncomeTax = function() {
 
-/*
-    Income Slab                 Tax Rate
-    Up to  2.5 lakhs            None
-    2.5 lakhs – 5 lakhs         10% of exceeding amount
-    5 lakhs – 10 lakhs          20% of the exceeding amount
-    Above 10 lakhs              30% of the exceeding amount
-*/
+    /*
+        Income Slab                 Tax Rate
+        Up to  2.5 lakhs            None
+        2.5 lakhs – 5 lakhs         10% of exceeding amount
+        5 lakhs – 10 lakhs          20% of the exceeding amount
+        Above 10 lakhs              30% of the exceeding amount
+    */
     let incomeTax = 0; // if less than 250000 lakhs income tax is 0.
 
     let grossAnnualIncome = getGrossAnnualIncome.call(this) - getTotalAmount.call(this, 'deductions');
@@ -65,7 +65,7 @@ const getIncomeTax = function () {
     return (incomeTax / 12);
 }
 
-router.post('/', async (req, res, next) => {
+router.post('/', async(req, res, next) => {
 
     let imageBase64 = null;
     let error = null;
@@ -75,7 +75,7 @@ router.post('/', async (req, res, next) => {
         imageBase64 = req.file.buffer.toString('base64');
     }
 
-    let generatedMonth =  moment().format("MMMM YYYY");
+    let generatedMonth = moment().format("MMMM YYYY");
 
     body.generatedMonth = moment().format("MMMM, YYYY");
     body.companyIconUrl = imageBase64 ? `data:${req.file.mimetype};base64,${imageBase64}` : body.companyIconUrl;
@@ -85,7 +85,7 @@ router.post('/', async (req, res, next) => {
         body.earnings = body.earnings ? JSON.parse(body.earnings) : [];
         body.deductions = body.deductions ? JSON.parse(body.deductions) : [];
         body.reimbursements = body.reimbursements ? JSON.parse(body.reimbursements) : [];
-    } catch(err) {
+    } catch (err) {
         return next(err);
     }
 
@@ -94,7 +94,7 @@ router.post('/', async (req, res, next) => {
         error = "Company name is missing!";
     } else if (!body.companyAddress) {
         error = "Company address is missing!";
-    }  else if (!body.employeeName) {
+    } else if (!body.employeeName) {
         error = "Employee name is missing!";
     } else if (!body.employeeEmail) {
         error = "Employee email is missing!";
@@ -145,13 +145,13 @@ router.post('/', async (req, res, next) => {
             obj.deductionAmount = deduction.amount;
         }
 
-         body.earningAndDeductions.push(obj);
+        body.earningAndDeductions.push(obj);
     })
 
     body.totalNetIncome = getTotalNetIncome.call(body);
 
     let pdfContent = null;
-    let pdfFileName  = `payslip-${_.kebabCase(generatedMonth).toLowerCase()}.pdf`
+    let pdfFileName = `payslip-${_.kebabCase(generatedMonth).toLowerCase()}.pdf`
 
     try {
 
@@ -183,8 +183,8 @@ router.post('/', async (req, res, next) => {
             };
 
             let result = await sendPayslipMail(options);
-
-            return res.json({ success: true, to: options.to, type: result.type, url: result.url });
+            console.log("result", result);
+            res.json({ success: true, to: options.to, type: result.type, url: result.url });
 
         } else {
             return next(new Error('Invalid type. Supported only type in email and download!'));
