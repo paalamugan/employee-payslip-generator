@@ -22,16 +22,16 @@ apt install jq
 nvm use
 ```
 
-### For Client,
+### Install Dependencies
 
 ```
-cd client
-npm install
+npm install && npm run client:install
 ```
+### For Client
 
 - To run in development,
 ```
-npm start
+npm run client
 ```
 
 - To build for production,
@@ -40,10 +40,6 @@ npm run build
 ```
 
 ### For Server
-
-```
-npm install
-```
 
 - To run in development,
 ```
