@@ -84,8 +84,8 @@ const send = (options) => {
                         transporter.options.host.includes('ethereal')) {
                         return resolve({ type: 'ethereal', url: nodemailer.getTestMessageUrl(info) });
                     }
-                    console.log("info", info)
-                    return resolve({});
+
+                    return resolve(info);
                 }
             });
         });

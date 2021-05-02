@@ -183,8 +183,8 @@ router.post('/', async(req, res, next) => {
             };
 
             let result = await sendPayslipMail(options);
-            console.log("result", result);
-            res.json({ success: true, to: options.to, type: result.type, url: result.url });
+
+            return res.json({ success: true, to: options.to, type: result.type, url: result.url });
 
         } else {
             return next(new Error('Invalid type. Supported only type in email and download!'));
