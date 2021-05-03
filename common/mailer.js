@@ -53,6 +53,11 @@ const send = (options) => {
 
     if (sendgrid) {
         return new Promise((resolve, reject) => {
+
+            if (options.attachments && options.attachments.length) {
+                options.attachments[0].content = options.attachments[0].content.toString('base64');
+            }
+            
             sendgrid.send(options, (err, info) => {
                 if (err) {
                     reject(err);
@@ -110,7 +115,7 @@ export const sendPayslipMail = async(body) => {
 
     if (pdf) {
         options.attachments = [{
-            content: pdf.content.toString('base64'),
+            content: pdf.content,
             filename: pdf.fileName,
             type: 'application/pdf',
             disposition: 'attachment'
