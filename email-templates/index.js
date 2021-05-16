@@ -55,7 +55,7 @@ const renderEmailTemplate = async (templateName, data) => {
     Object.assign(localData, data, defaultData);
 
     try {
-        let html = email.render(templateName, localData);
+        let html = await email.render(templateName, localData);
         // html = minify(html, minifyOptions);
         return html;
     } catch (err) {
