@@ -12,12 +12,12 @@ export const PayslipSampleData = {
   company: {
     icon: null,
     iconUrl: '',
-    name: 'YesVision pvt ltd.',
+    name: 'Mycompany pvt ltd.',
     address: '250, S-BLock, 27 Street, Adayar, Chennai: 600027'
   },
   employee: {
-    name: 'Paalamugan S',
-    email: 'abc@gmail.com',
+    name: 'John Deo',
+    email: 'johndeo123@gmail.com',
     id: 'emp01',
     position: 'Software Engineer',
     joiningDate: moment('2020-04-08').format(),

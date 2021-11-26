@@ -1,7 +1,8 @@
 import _ from 'lodash';
 import nodemailer from 'nodemailer';
 import { htmlToText } from 'nodemailer-html-to-text';
-import Mailgun from 'mailgun-js';
+import formData from 'form-data';
+import Mailgun from 'mailgun.js';
 import config from '../config';
 import renderEmailTemplate from '../email-templates';
 
@@ -22,10 +23,8 @@ let sendgrid;
 
 if (process.env.NODE_ENV === 'production') {
     if (config.mailgun.apiKey) {
-        mailgun = new Mailgun({
-            apikey: config.mailgun.apiKey,
-            domain: config.mailgun.domain
-        });
+        const mg =  new Mailgun(formData);
+        mailgun = mg.client({ username: 'api', key:  config.mailgun.apiKey });
     } else if (config.sendgrid.apiKey) {
         sendgrid = require('@sendgrid/mail');
         sendgrid.setApiKey(config.sendgrid.apiKey);
@@ -40,15 +39,7 @@ if (process.env.NODE_ENV === 'production') {
 const send = (options) => {
 
     if (mailgun) {
-        return new Promise((resolve, reject) => {
-            mailgun.messages().send(options, (err, info) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(info);
-                }
-            });
-        });
+        return mailgun.messages.create(config.mailgun.domain, options);
     }
 
     if (sendgrid) {

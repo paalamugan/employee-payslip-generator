@@ -1,9 +1,15 @@
 import express from 'express';
 import moment from 'moment';
 import fs from 'fs';
+import domains from 'disposable-email-domains';
 import _ from 'lodash';
 import { sendPayslipMail } from '../common';
 import renderPdfTemplate from '../pdf-templates';
+import emailValidator from 'deep-email-validator';
+ 
+const isEmailValid = async (email) => {
+ return emailValidator(email)
+}
 
 const router = express.Router();
 
@@ -70,6 +76,7 @@ router.post('/', async(req, res, next) => {
     let imageBase64 = null;
     let error = null;
     let body = req.body || {};
+    let { type } = body;
 
     if (req.file) {
         imageBase64 = req.file.buffer.toString('base64');
@@ -104,8 +111,15 @@ router.post('/', async(req, res, next) => {
         error = "Employee earnings values is missing!";
     } else if (body.earnings.length && !body.earnings[0].name) {
         error = "Wrong employee earnings values. Values must be array of object. Object like { name: 'Basic', amount: 10000 }";
+    } else if (domains.indexOf(body.employeeEmail) !== -1) { // validate a temp mail address
+        // error = `${body.employeeEmail} is not a professional employee email address`;
     }
 
+    if (type === "email") {
+        const { valid, reason, validators } = await isEmailValid(body.employeeEmail);
+        error = !valid && `${body.employeeEmail} is not a valid employee email address.`;
+    };
+    
     if (error) {
         return next(new Error(error));
     }

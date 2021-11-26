@@ -181,7 +181,6 @@ export default function PayslipForm() {
         }
 
         let fileName = 'payslip.pdf';
-
         fetch(REST_FETCH_API, {
             method: 'POST',
             body: form
@@ -248,7 +247,7 @@ export default function PayslipForm() {
 
   return (
     <Fragment>
-      <Alert {...alert} duration={3000} onClose={() => setAlert({...alert, open: false })} />
+      <Alert {...alert} duration={5000} onClose={() => setAlert({...alert, open: false })} />
       <main className={classes.layout}>
         <Paper elevation={0} className={classes.paper}>
           <Typography component="h1" variant="h4" align="center" gutterBottom>

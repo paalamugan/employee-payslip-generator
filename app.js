@@ -49,14 +49,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+app.use('/health', (req, res, next) => {
+    res.send('Ok');
+});
+
 app.use('/', express.static(path.join(__dirname, 'client', 'build')));
 
 app.use('/api/payslip', upload.single('companyIcon'), payslipRouter);
 
-
-app.use('/health', (req, res, next) => {
-    res.send('Ok');
-})
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
