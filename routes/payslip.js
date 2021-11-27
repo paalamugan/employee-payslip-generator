@@ -117,7 +117,10 @@ router.post('/', async(req, res, next) => {
 
     if (type === "email") {
         const { valid, reason, validators } = await isEmailValid(body.employeeEmail);
-        error = !valid && `${body.employeeEmail} is not a valid employee email address.`;
+        if (!valid && reason !== "disposable") {
+            error = `${body.employeeEmail} is not a valid employee email address.`;
+        }
+        
     };
     
     if (error) {
