@@ -7,7 +7,7 @@ import config from '../config';
 import renderEmailTemplate from '../email-templates';
 
 let mailer = {
-    from: '"Employee Payslip" <paalamugan26@gmail.com>',
+    from: '"Employee Payslip" <hello@paalamugan.com>',
     smtp: config.ethereal // all emails are catched by ethereal.email
 };
 
@@ -23,6 +23,7 @@ let sendgrid;
 
 if (process.env.NODE_ENV === 'production') {
     if (config.mailgun.apiKey) {
+        const Mailgun = require("mailgun.js");
         const mg =  new Mailgun(formData);
         mailgun = mg.client({ username: 'api', key:  config.mailgun.apiKey });
     } else if (config.sendgrid.apiKey) {

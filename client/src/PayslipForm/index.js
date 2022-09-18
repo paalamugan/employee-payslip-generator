@@ -218,13 +218,13 @@ export default function PayslipForm() {
 
               URL.revokeObjectURL(link.href);
 
-              handleReset();
+              // handleReset();
               setIsDownloadLoading(false);
               setAlert({ open: true, type: 'success', children: 'Successfully Downloaded.' });
 
             } else {
 
-              handleReset();
+              // handleReset();
               setIsEmailLoading(false);
               setResult(result);
 
