@@ -29,7 +29,7 @@ const pdfContent = async (pdfTemplateName, pdfTemplateData) => {
   let pdfHtml = pug.renderFile(`${PDF_TEMPLATE_PATH}/${pdfTemplateName}.pug`, pdfTemplateData);
 
   try {
-    const response = await fetch(`${process.env.PDF_GENERATOR_ENDPOINT}/api/pdf-generator`, {
+    const response = await fetch(`${process.env.PDF_GENERATOR_ENDPOINT}/api/pdfGenerator`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

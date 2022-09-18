@@ -1,32 +1,32 @@
-import React, { Fragment, useRef, useState } from 'react';
-import { isObject, isArray, cloneDeep } from 'lodash';
+import React, { Fragment, useRef, useState } from "react";
+import { isObject, isArray, cloneDeep } from "lodash";
 
-import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import GetAppIcon from '@material-ui/icons/GetApp';
-import SendIcon from '@material-ui/icons/Send';
+import Paper from "@material-ui/core/Paper";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import GetAppIcon from "@material-ui/icons/GetApp";
+import SendIcon from "@material-ui/icons/Send";
 
-import CircularProgress from '@material-ui/core/CircularProgress';
+import CircularProgress from "@material-ui/core/CircularProgress";
 
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from "@material-ui/core/styles";
 
-import { API_ENDPOINT, PayslipSampleData } from '../common';
+import { API_ENDPOINT, PayslipSampleData } from "../common";
 
-import { CompanyInfo, EmployeeInfo, EarningAndDeduction, Success, Alert } from './components';
+import { CompanyInfo, EmployeeInfo, EarningAndDeduction, Success, Alert } from "./components";
 
 const REST_FETCH_API = `${API_ENDPOINT}/payslip`;
 
 const useStyles = makeStyles((theme) => ({
   layout: {
-    width: 'auto',
+    width: "auto",
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(2),
     opacity: 0.9,
     [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
       width: 800,
-      marginLeft: 'auto',
-      marginRight: 'auto',
+      marginLeft: "auto",
+      marginRight: "auto",
     },
   },
   paper: {
@@ -44,88 +44,87 @@ const useStyles = makeStyles((theme) => ({
   },
   root: {
     marginTop: theme.spacing(2),
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between'
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   input: {
-    display: 'none'
+    display: "none",
   },
   uploadButton: {
-    cursor: 'pointer',
-    minWidth: '135px'
+    cursor: "pointer",
+    minWidth: "135px",
   },
   uploadText: {
-    overflow: 'hidden',
-    whiteSpace: 'nowrap',
-    textOverflow: 'ellipsis'
+    overflow: "hidden",
+    whiteSpace: "nowrap",
+    textOverflow: "ellipsis",
   },
   girdButton: {
     marginBottom: theme.spacing(3),
   },
   addButton: {
-    marginLeft: theme.spacing(1)
+    marginLeft: theme.spacing(1),
   },
   marginBottom2: {
-    marginBottom: theme.spacing(2)
+    marginBottom: theme.spacing(2),
   },
   buttons: {
-    display: 'flex',
-    justifyContent: 'flex-end',
+    display: "flex",
+    justifyContent: "flex-end",
     marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(2)
+    marginBottom: theme.spacing(2),
   },
   button: {
     marginTop: theme.spacing(3),
     marginLeft: theme.spacing(1),
   },
   floatRight: {
-    float: 'right'
+    float: "right",
   },
   marginTop3: {
-    marginTop: theme.spacing(3)
-  }
+    marginTop: theme.spacing(3),
+  },
 }));
 
 const initialData = {
   company: {
     icon: null,
-    iconUrl: '',
-    name: '',
-    address: ''
+    iconUrl: "",
+    name: "",
+    address: "",
   },
   employee: {
-    name: '',
-    email: '',
-    id: '',
-    position: '',
+    name: "",
+    email: "",
+    id: "",
+    position: "",
     joiningDate: null,
-    uan: '',
-    accountNumber: '',
-    pfAccountNumber: '',
+    uan: "",
+    accountNumber: "",
+    pfAccountNumber: "",
     paidDays: 0,
-    lopDays: 0
+    lopDays: 0,
   },
   earnings: [],
   deductions: [],
-  reimbursements: []
-}
+  reimbursements: [],
+};
 
 export default function PayslipForm() {
-
   const classes = useStyles();
 
   const [result, setResult] = useState(null);
-  const [alert, setAlert] = useState({ open:false, type: '', children: '' });
+  const [alert, setAlert] = useState({ open: false, type: "", children: "" });
   const [isDownloadLoading, setIsDownloadLoading] = useState(false);
   const [isEmailLoading, setIsEmailLoading] = useState(false);
 
   const templateData = useRef(cloneDeep(initialData));
-  const companyRef =  useRef();
-  const employeeRef =  useRef();
-  const earningRef =  useRef();
-  const deductionRef =  useRef();
-  const reimbursementRef =  useRef();
+  const companyRef = useRef();
+  const employeeRef = useRef();
+  const earningRef = useRef();
+  const deductionRef = useRef();
+  const reimbursementRef = useRef();
 
   const handleReset = () => {
     templateData.current = cloneDeep(initialData);
@@ -135,7 +134,7 @@ export default function PayslipForm() {
     earningRef.current.reset(templateData.current.earnings);
     deductionRef.current.reset(templateData.current.deductions);
     reimbursementRef.current.reset(templateData.current.reimbursements);
-  }
+  };
 
   const onSetSampleData = () => {
     templateData.current = cloneDeep(PayslipSampleData);
@@ -145,62 +144,57 @@ export default function PayslipForm() {
     earningRef.current.set(templateData.current.earnings);
     deductionRef.current.set(templateData.current.deductions);
     reimbursementRef.current.set(templateData.current.reimbursements);
-
-  }
+  };
 
   const handleFetchRequest = (type) => {
-
     return (event) => {
+      event.preventDefault();
 
-        event.preventDefault();
+      templateData.current.type = type;
 
-        templateData.current.type = type;
+      if (type === "download") {
+        setIsDownloadLoading(true);
+      } else {
+        setIsEmailLoading(true);
+      }
 
-        if (type === 'download') {
-          setIsDownloadLoading(true);
-        } else {
-          setIsEmailLoading(true);
-        }
+      var form = new FormData();
 
-        var form = new FormData();
-
-        for (const key in templateData.current) {
-            if (isObject(templateData.current[key]) && !isArray(templateData.current[key])) {
-                for (const subKey in templateData.current[key]) {
-                  if (templateData.current[key][subKey]) {
-                    form.append(key + subKey.charAt(0).toUpperCase() + subKey.slice(1), templateData.current[key][subKey]);
-                  }
-                }
-            } else if (isArray(templateData.current[key])) {
-                form.append(key, JSON.stringify(templateData.current[key]));
-            } else {
-              if (templateData.current[key]) {
-                form.append(key, templateData.current[key]);
-              }
+      for (const key in templateData.current) {
+        if (isObject(templateData.current[key]) && !isArray(templateData.current[key])) {
+          for (const subKey in templateData.current[key]) {
+            if (templateData.current[key][subKey]) {
+              form.append(key + subKey.charAt(0).toUpperCase() + subKey.slice(1), templateData.current[key][subKey]);
             }
+          }
+        } else if (isArray(templateData.current[key])) {
+          form.append(key, JSON.stringify(templateData.current[key]));
+        } else {
+          if (templateData.current[key]) {
+            form.append(key, templateData.current[key]);
+          }
         }
+      }
 
-        let fileName = 'payslip.pdf';
-        fetch(REST_FETCH_API, {
-            method: 'POST',
-            body: form
-        })
+      let fileName = "payslip.pdf";
+      fetch(REST_FETCH_API, {
+        method: "POST",
+        body: form,
+      })
         .then((response) => {
-
           if (!response.ok) {
             return response.json();
           }
 
-          let contentDisposition = response.headers.get('content-disposition');
+          let contentDisposition = response.headers.get("content-disposition");
 
           if (contentDisposition) {
-            fileName = contentDisposition.replace(/.*="|"$/g, '');
+            fileName = contentDisposition.replace(/.*="|"$/g, "");
           }
 
-          return (type === 'download' ? response.blob() : response.json())
+          return type === "download" ? response.blob() : response.json();
         })
         .then((response) => {
-
           if (response.status && response.status > 399) {
             throw new Error(response.message);
           }
@@ -208,93 +202,97 @@ export default function PayslipForm() {
           return response;
         })
         .then((result) => {
+          if (type === "download") {
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(result);
+            link.download = fileName;
+            link.click();
 
-            if (type === 'download') {
+            URL.revokeObjectURL(link.href);
 
-              const link = document.createElement('a')
-              link.href = URL.createObjectURL(result)
-              link.download = fileName;
-              link.click();
-
-              URL.revokeObjectURL(link.href);
-
-              // handleReset();
-              setIsDownloadLoading(false);
-              setAlert({ open: true, type: 'success', children: 'Successfully Downloaded.' });
-
-            } else {
-
-              // handleReset();
-              setIsEmailLoading(false);
-              setResult(result);
-
-            }
-
+            // handleReset();
+            setIsDownloadLoading(false);
+            setAlert({ open: true, type: "success", children: "Successfully Downloaded." });
+          } else {
+            // handleReset();
+            setIsEmailLoading(false);
+            setResult(result);
+          }
         })
         .catch((err) => {
+          setAlert({ open: true, type: "error", children: err.message });
 
-          setAlert({ open: true, type: 'error', children: err.message });
-
-          if (type === 'download') {
+          if (type === "download") {
             setIsDownloadLoading(false);
           } else {
             setIsEmailLoading(false);
           }
-
-        })
-    }
+        });
+    };
   };
 
   return (
     <Fragment>
-      <Alert {...alert} duration={5000} onClose={() => setAlert({...alert, open: false })} />
+      <Alert {...alert} duration={5000} onClose={() => setAlert({ ...alert, open: false })} />
       <main className={classes.layout}>
         <Paper elevation={0} className={classes.paper}>
           <Typography component="h1" variant="h4" align="center" gutterBottom>
             Employee Payslip Generator
           </Typography>
-          {
-            result ? (<Success result={result} setResult={setResult} classes={classes} />) :
-              (<Fragment>
-                <section className={classes.section}>
-                  <Button variant="contained" size="small" className={classes.floatRight} onClick={onSetSampleData}>Set Sample Data</Button>
-                  <CompanyInfo templateData={templateData} classes={classes} ref={companyRef} />
-                  <EmployeeInfo templateData={templateData} classes={classes} ref={employeeRef} />
-                  <EarningAndDeduction type="earning" templateData={templateData} classes={classes} ref={earningRef} />
-                  <EarningAndDeduction type="deduction" templateData={templateData} classes={classes} ref={deductionRef} />
-                  <EarningAndDeduction type="reimbursement" templateData={templateData} classes={classes} ref={reimbursementRef} />
-                </section>
+          {result ? (
+            <Success result={result} setResult={setResult} classes={classes} />
+          ) : (
+            <Fragment>
+              <section className={classes.section}>
+                <Button variant="contained" size="small" className={classes.floatRight} onClick={onSetSampleData}>
+                  Apply with Sample Data
+                </Button>
+                <CompanyInfo templateData={templateData} classes={classes} ref={companyRef} />
+                <EmployeeInfo templateData={templateData} classes={classes} ref={employeeRef} />
+                <EarningAndDeduction type="earning" templateData={templateData} classes={classes} ref={earningRef} />
+                <EarningAndDeduction
+                  type="deduction"
+                  templateData={templateData}
+                  classes={classes}
+                  ref={deductionRef}
+                />
+                <EarningAndDeduction
+                  type="reimbursement"
+                  templateData={templateData}
+                  classes={classes}
+                  ref={reimbursementRef}
+                />
+              </section>
 
-                <div className={classes.buttons}>
-                  <Button
-                    variant="contained"
-                    onClick={handleReset}
-                    className={classes.button} >
-                      Reset
-                  </Button>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    startIcon={isDownloadLoading ? <CircularProgress size={24} thickness={4} value={100} /> : <GetAppIcon />}
-                    onClick={handleFetchRequest('download')}
-                    disabled={isDownloadLoading}
-                    className={classes.button} >
-                      Download as PDF
-                  </Button>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    startIcon={isEmailLoading ? <CircularProgress size={24} thickness={4} value={100} /> : <SendIcon />}
-                    onClick={handleFetchRequest('email')}
-                    disabled={isEmailLoading}
-                    className={classes.button}
-                  >
-                    Send as Email
-                  </Button>
-                </div>
-              </Fragment>)
-          }
-
+              <div className={classes.buttons}>
+                <Button variant="contained" onClick={handleReset} className={classes.button}>
+                  Reset
+                </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  startIcon={
+                    isDownloadLoading ? <CircularProgress size={24} thickness={4} value={100} /> : <GetAppIcon />
+                  }
+                  onClick={handleFetchRequest("download")}
+                  disabled={isDownloadLoading}
+                  className={classes.button}
+                >
+                  Download as PDF
+                </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  startIcon={isEmailLoading ? <CircularProgress size={24} thickness={4} value={100} /> : <SendIcon />}
+                  onClick={handleFetchRequest("email")}
+                  disabled={isEmailLoading}
+                  className={classes.button}
+                >
+                  Send as Email
+                </Button>
+              </div>
+            </Fragment>
+          )}
         </Paper>
       </main>
     </Fragment>
