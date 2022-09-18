@@ -7,6 +7,7 @@
     "scripts": {
         "start": "node main.js",
         "build": "cd client && npm run build",
+        "vercel-build": "npm run client:install && npm run build",
         "client:install": "cd client && npm install",
         "heroku-postbuild": "npm run client:install && npm run build",
         "client": "cd client && npm start",
