@@ -47,7 +47,9 @@ block content
 								b= employeeAccountNumber
 					td.text-right
 						.mb-5 Employee Net Pay
-						.font-38(class=`${employeePaidDays || employeeLopDays ? 'mb-5' : '' }`)= formatCurrency(totalNetIncome)
+						.font-38(class=`${employeePaidDays || employeeLopDays ? 'mb-5' : '' }`) 
+							span.rupee-lg
+							span= formatCurrency(totalNetIncome)
 						div
 							if employeePaidDays
 								span Paid Days : #{employeePaidDays}
@@ -68,20 +70,28 @@ block content
 				each row in earningAndDeductions
 					tr
 						td= row.earningName
-						td= row.earningAmount ? formatCurrency(row.earningAmount) : ''
+						td
+							span.rupee-sm
+							span= row.earningAmount ? formatCurrency(row.earningAmount) : ''
 						//- td row.earningYTD ? formatCurrency(row.earningYTD) : ''
 						td
 						td= row.deductionName
-						td= row.deductionName || row.deductionAmount ? formatCurrency(row.deductionAmount) : ''
+						td
+							span(class=row.deductionName || row.deductionAmount ? "rupee-sm" : "")
+							span= row.deductionName || row.deductionAmount ? formatCurrency(row.deductionAmount) : ''
 						//- td row.deductionYTD ? formatCurrency(row.deductionYTD) : ''
 			tfoot
 				tr
 					td Gross Earnings
-					td= formatCurrency(totalEarnings)
+						td
+							span.rupee-sm
+							span= formatCurrency(totalEarnings)
 					//- td totalEarningsYTD ? formatCurrency(totalEarningsYTD) : ''
 					td
 					td Total Deductions
-					td= formatCurrency(totalDeductions)
+						td
+							span.rupee-sm
+							span= formatCurrency(totalDeductions)
 					//- td totalDeductionsYTD ? formatCurrency(totalDeductionsYTD) : ''
 		br
 		br
@@ -96,12 +106,16 @@ block content
 					each reimbursement in reimbursements
 						tr
 							td= reimbursement.name
-							td= reimbursement.amount ? formatCurrency(reimbursement.amount) : ''
+							td
+								span(class=reimbursement.amount ? "rupee-sm" : "")
+								span= reimbursement.amount ? formatCurrency(reimbursement.amount) : ''
 							//- td reimbursement.ytd ? formatCurrency(reimbursement.ytd) : ''
 				tfoot
 					tr
 						td Total Reimbursement
-						td= formatCurrency(totalReimbursements)
+						td
+							span.rupee-sm
+							span= formatCurrency(totalReimbursements)
 						//- td totalReimbursementsYTD ? formatCurrency(totalReimbursementsYTD) : ''
 		br
 		br
@@ -110,6 +124,7 @@ block content
 				tr
 					td.net-payable
 						.mb-5
-							span.text Total Net Payable #{formatCurrency(totalNetIncome)}
-							span (Rupees #{convertNumberToRupees(totalNetIncome)})
+							span.text Total Net Payable
+							span.rupee-sm 
+							span #{formatCurrency(totalNetIncome)} (Rupees #{convertNumberToRupees(totalNetIncome)})
 						.calculation-text Total Net Payable= ((Gross Earnings - Total Deductions) + Reimbursements)

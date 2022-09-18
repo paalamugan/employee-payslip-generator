@@ -1,5 +1,5 @@
-@import "./fonts/open-sans-source-sans.css";
 /* @import "./fonts/source-sans-pro-lato.css"; */
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap");
 
 a {
   color: #007ee6;
@@ -7,7 +7,6 @@ a {
 }
 
 .dont-break-out {
-
   /* These are technically the same, but use both */
   overflow-wrap: break-word;
   word-wrap: break-word;
@@ -23,30 +22,46 @@ a {
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
   hyphens: auto;
+}
 
+.rupee-lg {
+  display: inline-block;
+  width: 18px;
+  height: 25px;
+  background-position: left;
+  background-image: url("http://i.imgur.com/Fd7NROx.png");
+  background-repeat: no-repeat;
+  padding-right: 5px;
+  background-size: auto auto;
+}
+
+.rupee-sm {
+  display: inline-block;
+  width: 11px;
+  height: 12px;
+  background-image: url("http://i.imgur.com/Fd7NROx.png");
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: 10px 12px;
 }
 
 @media print {
+  .no-print {
+    display: none !important;
+  }
 
-    .no-print {
-        display: none !important;
-    }
+  .page-break-inside-avoid {
+    page-break-inside: avoid;
+  }
 
-    .page-break-inside-avoid {
-        page-break-inside: avoid;
-    }
+  .page-break-before-auto {
+    page-break-before: auto;
+  }
 
-    .page-break-before-auto {
-        page-break-before: auto;
-    }
-
-    .page-break-after-auto {
-        page-break-after: auto;
-    }
-
+  .page-break-after-auto {
+    page-break-after: auto;
+  }
 }
-
-
 
 body {
   width: 100% !important;
@@ -56,7 +71,7 @@ body {
   -ms-text-size-adjust: 100%;
   background-color: #fff;
   color: #000000;
-  font-family: 'Open Sans', 'Source Sans Pro', Arial, sans-serif;
+  font-family: "Open Sans", "Source Sans Pro", Arial, sans-serif;
 }
 
 .payslip-box {
@@ -65,7 +80,7 @@ body {
   margin: auto;
   padding: 30px;
   font-size: 16px;
-  font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
   /*-webkit-print-color-adjust: exact;*/
 }
 
@@ -74,12 +89,15 @@ table {
   width: 100%;
 }
 
-table, th, td {
+table,
+th,
+td {
   text-align: left;
   padding: 15px;
 }
 
-table.table th , table.table td {
+table.table th,
+table.table td {
   padding: 18px;
 }
 
@@ -133,7 +151,7 @@ img {
 }
 
 .text-uppercase {
-    text-transform: uppercase;
+  text-transform: uppercase;
 }
 
 .font-18 {
@@ -152,11 +170,13 @@ img {
   font-size: 38px;
 }
 
-.table th:not(:first-child), .table td:not(:first-child) {
+.table th:not(:first-child),
+.table td:not(:first-child) {
   text-align: right;
 }
 
-.table th:nth-child(4), .table td:nth-child(4) {
+.table th:nth-child(4),
+.table td:nth-child(4) {
   text-align: left;
 }
 
@@ -178,9 +198,8 @@ img {
 }
 
 .flex {
-    display: flex;
+  display: flex;
 }
-
 
 /*
 .invoice-box table {

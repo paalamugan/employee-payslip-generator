@@ -5,6 +5,7 @@ import numeral from "numeral";
 import fetch from "node-fetch";
 
 import { siteUrl, convertNumberToRupees } from "../common";
+import { writeFileSync } from "fs";
 
 const PDF_TEMPLATE_PATH = path.join(__dirname, "templates");
 
@@ -23,7 +24,7 @@ const pdfContent = async (pdfTemplateName, pdfTemplateData) => {
   };
 
   pdfTemplateData.formatCurrency = (amount) => {
-    return "₹" + numeral(amount).format("0,0.00");
+    return numeral(amount).format("0,0.00");
   };
 
   let pdfHtml = pug.renderFile(`${PDF_TEMPLATE_PATH}/${pdfTemplateName}.pug`, pdfTemplateData);

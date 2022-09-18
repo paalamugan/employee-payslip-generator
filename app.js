@@ -53,7 +53,7 @@ app.use(cookieParser());
 app.use("/health", (req, res, next) => {
   res.send("Ok");
 });
-
+app.use(express.static(path.join(__dirname, "public")));
 app.use("/", express.static(path.join(__dirname, "client", "build")));
 
 app.use("/api/payslip", upload.single("companyIcon"), payslipRouter);
